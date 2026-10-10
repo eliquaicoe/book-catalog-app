@@ -31,4 +31,24 @@ class AuthController extends Controller
 
         return redirect()->route('books.index');
     }
+
+    
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->route('books.index');
+        }
+
+        return back()->withErrors([
+            'email' => 'The email or password is incorrect.',
+        ])->onlyInput('email');
+    }
+
 }

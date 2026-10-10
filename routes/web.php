@@ -31,3 +31,10 @@ Route::get('/register', function () {
 
 Route::post('/register', [AuthController::class, 'register'])
     ->name('register.store');
+  
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+Route::post('/login', [AuthController::class, 'login'])
+    ->name('login.store');
