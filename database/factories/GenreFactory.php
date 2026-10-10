@@ -18,7 +18,14 @@ class GenreFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->randomElement([
+                'Fantasy',
+                'Mystery',
+                'Romance',
+                'Science Fiction',
+                'Thriller',
+                'Historical Fiction',
+            ]),
         ];
     }
 }
