@@ -10,7 +10,11 @@
 
     @forelse ($books as $book)
         <article>
-            <h2>{{ $book->title }}</h2>
+        <h2>
+            <a href="{{ route('books.show', $book) }}">
+               {{ $book->title }}
+            </a>
+       </h2>
             <p>Author: {{ $book->author }}</p>
             <p>Genre: {{ $book->genre->name }}</p>
             <p>{{ $book->description }}</p>
