@@ -38,3 +38,6 @@ Route::get('/login', function () {
 
 Route::post('/login', [AuthController::class, 'login'])
     ->name('login.store');
+
+    Route::post('/logout', [AuthController::class, 'logout'])
+    ->name('logout');

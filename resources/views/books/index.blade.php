@@ -8,6 +8,20 @@
 <body>
     <h1>Our Book Catalog</h1>
 
+@if (Auth::check())
+    <p>Welcome, {{ Auth::user()->name }}!</p>
+
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit">Log Out</button>
+    </form>
+@else
+    <p>
+        <a href="{{ route('login') }}">Log In</a> |
+        <a href="{{ route('register') }}">Register</a>
+    </p>
+@endif
+
     @forelse ($books as $book)
         <article>
         <h2>
