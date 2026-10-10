@@ -12,7 +12,13 @@
 
     @forelse ($genres as $genre)
         <article>
-            <h2>{{ $genre->name }}</h2>
+            
+   <h2>
+    <a href="{{ route('genres.show', $genre) }}">
+        {{ $genre->name }}
+    </a>
+    </h2>
+
         </article>
     @empty
         <p>No genres have been added yet.</p>

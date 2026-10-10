@@ -13,4 +13,12 @@ class GenreController extends Controller
 
         return view('genres.index', compact('genres'));
     }
+
+    public function show(Genre $genre): View
+{
+    $genre->load('books');
+
+    return view('genres.show', compact('genre'));
+}
+
 }
