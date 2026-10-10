@@ -15,3 +15,7 @@ Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show')
 Route::get('/genres', [GenreController::class, 'index'])->name('genres.index');
 
 Route::get('/genres/{genre}', [GenreController::class, 'show'])->name('genres.show');
+
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
