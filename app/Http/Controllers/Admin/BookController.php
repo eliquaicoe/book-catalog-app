@@ -16,14 +16,29 @@ class BookController extends Controller
     }
 
     public function create(): View
-    {
-        //
-    }
+{
+    $genres = \App\Models\Genre::orderBy('name')->get();
 
-    public function store()
-    {
-        //
-    }
+    return view('admin.books.create', compact('genres'));
+}
+
+    public function store(\Illuminate\Http\Request $request)
+{
+    $validated = $request->validate([
+        'title' => ['required', 'string', 'max:255'],
+        'author' => ['required', 'string', 'max:255'],
+        'description' => ['required', 'string'],
+        'genre_id' => ['required', 'exists:genres,id'],
+    ]);
+
+    $validated['user_id'] = auth()->id();
+
+    Book::create($validated);
+
+    return redirect()
+        ->route('admin.books.index')
+        ->with('success', 'Book added successfully!');
+}
 
     public function show(Book $book): View
     {
@@ -31,14 +46,27 @@ class BookController extends Controller
     }
 
     public function edit(Book $book): View
-    {
-        //
-    }
+   {
+    $genres = \App\Models\Genre::orderBy('name')->get();
 
-    public function update(Book $book)
-    {
-        //
-    }
+    return view('admin.books.edit', compact('book', 'genres'));
+   }
+    
+public function update(\Illuminate\Http\Request $request, Book $book)
+ {
+    $validated = $request->validate([
+        'title' => ['required', 'string', 'max:255'],
+        'author' => ['required', 'string', 'max:255'],
+        'description' => ['required', 'string'],
+        'genre_id' => ['required', 'exists:genres,id'],
+    ]);
+
+    $book->update($validated);
+
+    return redirect()
+        ->route('admin.books.index')
+        ->with('success', 'Book updated successfully!');
+ }
 
     public function destroy(Book $book)
     {

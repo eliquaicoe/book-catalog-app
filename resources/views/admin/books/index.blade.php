@@ -8,6 +8,14 @@
 <body>
     <h1>Manage Books</h1>
 
+    @if (session('success'))
+    <p>{{ session('success') }}</p>
+@endif
+
+   <p>
+    <a href="{{ route('admin.books.create') }}">+ Add New Book</a>
+   </p>
+
     <p>Welcome, {{ auth()->user()->name }}!</p>
 
     <p><a href="{{ route('admin.dashboard') }}">Back to Admin Dashboard</a></p>
@@ -20,6 +28,10 @@
             <p>Author: {{ $book->author }}</p>
             <p>Genre: {{ $book->genre->name }}</p>
             <p>Added by: {{ $book->user->name }}</p>
+
+            <p>
+        <a href="{{ route('admin.books.edit', $book) }}">Edit</a>
+            </p>
         </article>
         <hr>
     @empty

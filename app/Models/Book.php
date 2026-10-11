@@ -10,6 +10,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Book extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'author',
+        'description',
+        'genre_id',
+        'user_id',
+    ];
     
        public function genre(): BelongsTo
     {

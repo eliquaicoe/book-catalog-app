@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\BookController as AdminBookController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -47,7 +48,20 @@ Route::post('/login', [AuthController::class, 'login'])
         return view('admin.dashboard');
     })->name('admin.dashboard');
 
-    Route::get('/admin/books', [\App\Http\Controllers\Admin\BookController::class, 'index'])
-    ->name('admin.books.index');
+    Route::get('/admin/books', [AdminBookController::class, 'index'])
+        ->name('admin.books.index');
+
+    Route::get('/admin/books/create', [AdminBookController::class, 'create'])
+        ->name('admin.books.create');
+
+    Route::post('/admin/books', [AdminBookController::class, 'store'])
+        ->name('admin.books.store');
+
+    
+    Route::get('/admin/books/{book}/edit', [AdminBookController::class, 'edit'])
+    ->name('admin.books.edit');
+
+    Route::put('/admin/books/{book}', [AdminBookController::class, 'update'])
+    ->name('admin.books.update');
 
 }); 
