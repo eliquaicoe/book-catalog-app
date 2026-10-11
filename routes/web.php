@@ -6,6 +6,7 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\BookController as AdminBookController;
 use App\Http\Controllers\Admin\GenreController as AdminGenreController;
+use App\Http\Controllers\Admin\CommentController as AdminCommentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -91,4 +92,20 @@ Route::post('/login', [AuthController::class, 'login'])
 
     Route::delete('/admin/genres/{genre}', [AdminGenreController::class, 'destroy'])
     ->name('admin.genres.destroy');
+    
+    Route::get('/admin/comments', [AdminCommentController::class, 'index'])
+    ->name('admin.comments.index');
+
+    Route::get('/admin/comments/{comment}', [AdminCommentController::class, 'show'])
+    ->name('admin.comments.show');
+
+    Route::get('/admin/comments/{comment}/edit', [AdminCommentController::class, 'edit'])
+    ->name('admin.comments.edit');
+
+    Route::put('/admin/comments/{comment}', [AdminCommentController::class, 'update'])
+    ->name('admin.comments.update');
+
+    Route::delete('/admin/comments/{comment}', [AdminCommentController::class, 'destroy'])
+    ->name('admin.comments.destroy');
+
 }); 
