@@ -32,6 +32,18 @@
             <p>
         <a href="{{ route('admin.books.edit', $book) }}">Edit</a>
             </p>
+            
+       <form
+       action="{{ route('admin.books.destroy', $book) }}"
+       method="POST"
+       onsubmit="return confirm('Are you sure you want to delete this book?');"
+>
+        @csrf
+        @method('DELETE')
+
+       <button type="submit">Delete</button>
+       </form>
+
         </article>
         <hr>
     @empty

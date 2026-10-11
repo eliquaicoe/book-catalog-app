@@ -69,7 +69,11 @@ public function update(\Illuminate\Http\Request $request, Book $book)
  }
 
     public function destroy(Book $book)
-    {
-        //
-    }
+{
+    $book->delete();
+
+    return redirect()
+        ->route('admin.books.index')
+        ->with('success', 'Book deleted successfully!');
+}
 }

@@ -56,12 +56,14 @@ Route::post('/login', [AuthController::class, 'login'])
 
     Route::post('/admin/books', [AdminBookController::class, 'store'])
         ->name('admin.books.store');
-
     
     Route::get('/admin/books/{book}/edit', [AdminBookController::class, 'edit'])
     ->name('admin.books.edit');
 
     Route::put('/admin/books/{book}', [AdminBookController::class, 'update'])
     ->name('admin.books.update');
+   
+     Route::delete('/admin/books/{book}', [AdminBookController::class, 'destroy'])
+    ->name('admin.books.destroy');
 
 }); 
