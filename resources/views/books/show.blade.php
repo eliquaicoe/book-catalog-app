@@ -18,5 +18,18 @@
     <p>{{ $book->description }}</p>
 
     <p><strong>Added by:</strong> {{ $book->user->name }}</p>
+
+     <h2>Comments</h2>
+
+    @forelse ($book->comments as $comment)
+    <article>
+        <p><strong>{{ $comment->user->name }}</strong></p>
+        <p>{{ $comment->text }}</p>
+    </article>
+    <hr>
+    @empty
+    <p>No comments yet. Be the first to comment!</p>
+    @endforelse
+
 </body>
 </html>
