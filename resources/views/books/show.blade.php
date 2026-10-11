@@ -31,5 +31,40 @@
     <p>No comments yet. Be the first to comment!</p>
     @endforelse
 
+<hr>
+
+    @auth
+    <h3>Leave a Comment</h3>
+
+    @if (session('success'))
+        <p>{{ session('success') }}</p>
+    @endif
+
+    <form action="{{ route('books.comments.store', $book) }}" method="POST">
+        @csrf
+
+        <div>
+            <label for="text">Your comment:</label>
+            <textarea
+                id="text"
+                name="text"
+                required
+                maxlength="2000"
+            >{{ old('text') }}</textarea>
+
+            @error('text')
+                <p>{{ $message }}</p>
+            @enderror
+        </div>
+
+        <button type="submit">Post Comment</button>
+    </form>
+    @else
+      <p>
+        <a href="{{ route('login') }}">Log in</a>
+        to leave a comment.
+      </p>
+    @endauth
+
 </body>
 </html>

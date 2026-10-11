@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
@@ -19,5 +20,21 @@ class BookController extends Controller
         $book->load('genre', 'user', 'comments.user');
 
         return view('books.show', compact('book'));
+    }
+    
+    public function storeComment(Request $request, Book $book)
+    {
+    $validated = $request->validate([
+        'text' => ['required', 'string', 'max:2000'],
+    ]);
+
+    $book->comments()->create([
+        'text' => $validated['text'],
+        'user_id' => $request->user()->id,
+    ]);
+
+    return redirect()
+        ->route('books.show', $book)
+        ->with('success', 'Your comment was added successfully!');
     }
 }
