@@ -68,12 +68,14 @@ public function update(\Illuminate\Http\Request $request, Book $book)
         ->with('success', 'Book updated successfully!');
  }
 
-    public function destroy(Book $book)
-{
+      public function destroy(Book $book)
+    {
+    $book->comments()->delete();
+
     $book->delete();
 
     return redirect()
         ->route('admin.books.index')
         ->with('success', 'Book deleted successfully!');
-}
+   }
 }
