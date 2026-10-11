@@ -111,4 +111,6 @@ Route::post('/login', [AuthController::class, 'login'])
     Route::get('/admin/users', [\App\Http\Controllers\Admin\UserController::class, 'index'])
     ->name('admin.users.index');
     
+    Route::delete('/admin/users/{user}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])
+    ->name('admin.users.destroy');
 }); 

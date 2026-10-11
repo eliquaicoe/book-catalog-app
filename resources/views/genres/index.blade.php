@@ -1,29 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Genres</title>
-</head>
-<body>
-    <h1>Explore Book Genres</h1>
+@extends('layouts.app')
 
-    <p>Choose a genre to explore its books.</p>
+@section('title', 'Genres')
+
+@section('content')
+    <h2>Browse Genres</h2>
 
     @forelse ($genres as $genre)
         <article>
-            
-   <h2>
-    <a href="{{ route('genres.show', $genre) }}">
-        {{ $genre->name }}
-    </a>
-    </h2>
+            <h3>
+                <a href="{{ route('genres.show', $genre) }}">
+                    {{ $genre->name }}
+                </a>
+            </h3>
 
+            @if ($genre->description)
+                <p>{{ $genre->description }}</p>
+            @endif
         </article>
+        <hr>
     @empty
         <p>No genres have been added yet.</p>
     @endforelse
-
-    <p><a href="/">Back to Home</a></p>
-</body>
-</html>
+@endsection
