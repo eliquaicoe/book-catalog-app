@@ -46,4 +46,8 @@ Route::post('/login', [AuthController::class, 'login'])
     Route::get('/admin', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
-});
+
+    Route::get('/admin/books', [\App\Http\Controllers\Admin\BookController::class, 'index'])
+    ->name('admin.books.index');
+
+}); 
