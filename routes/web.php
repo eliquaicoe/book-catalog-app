@@ -5,6 +5,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\BookController as AdminBookController;
+use App\Http\Controllers\Admin\GenreController as AdminGenreController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -69,5 +70,25 @@ Route::post('/login', [AuthController::class, 'login'])
    
      Route::delete('/admin/books/{book}', [AdminBookController::class, 'destroy'])
     ->name('admin.books.destroy');
+   
+    Route::get('/admin/genres', [AdminGenreController::class, 'index'])
+    ->name('admin.genres.index');
 
+    Route::get('/admin/genres/create', [AdminGenreController::class, 'create'])
+    ->name('admin.genres.create');
+
+    Route::post('/admin/genres', [AdminGenreController::class, 'store'])
+    ->name('admin.genres.store');
+
+    Route::get('/admin/genres/{genre}', [AdminGenreController::class, 'show'])
+    ->name('admin.genres.show');
+
+    Route::get('/admin/genres/{genre}/edit', [AdminGenreController::class, 'edit'])
+    ->name('admin.genres.edit');
+
+    Route::put('/admin/genres/{genre}', [AdminGenreController::class, 'update'])
+    ->name('admin.genres.update');
+
+    Route::delete('/admin/genres/{genre}', [AdminGenreController::class, 'destroy'])
+    ->name('admin.genres.destroy');
 }); 
