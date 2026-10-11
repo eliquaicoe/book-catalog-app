@@ -108,4 +108,7 @@ Route::post('/login', [AuthController::class, 'login'])
     Route::delete('/admin/comments/{comment}', [AdminCommentController::class, 'destroy'])
     ->name('admin.comments.destroy');
 
+    Route::get('/admin/users', [\App\Http\Controllers\Admin\UserController::class, 'index'])
+    ->name('admin.users.index');
+    
 }); 

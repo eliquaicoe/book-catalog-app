@@ -1,22 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Book Catalog App</title>
-</head>
-<body>
-    <h1>Admin Dashboard</h1>
+@extends('layouts.app')
 
-    <p>Welcome, {{ auth()->user()->name }}!</p>
+@section('title', 'Admin Dashboard')
 
+@section('content')
+    <h2>Admin Dashboard</h2>
+
+    <p>Welcome, Site Admin!</p>
     <p>You have successfully accessed the admin area.</p>
 
-    <p><a href="{{ route('books.index') }}">View Book Catalog</a></p>
+    <h3>Manage Your Catalog</h3>
 
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit">Log Out</button>
-    </form>
-</body>
-</html>
+    <ul>
+        <li>
+            <a href="{{ route('admin.books.index') }}">Manage Books</a>
+        </li>
+        <li>
+            <a href="{{ route('admin.genres.index') }}">Manage Genres</a>
+        </li>
+        <li>
+            <a href="{{ route('admin.comments.index') }}">Manage Comments</a>
+        </li>
+        <li>
+            <a href="{{ route('admin.users.index') }}">Manage Users</a>
+        </li>
+    </ul>
+@endsection

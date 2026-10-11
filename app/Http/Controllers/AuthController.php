@@ -39,12 +39,16 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required', 'string'],
         ]);
+       
+    if (Auth::attempt($credentials)) {
+    $request->session()->regenerate();
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+    if (Auth::user()->role === 'admin') {
+        return redirect()->route('admin.dashboard');
+    }
 
-            return redirect()->route('books.index');
-        }
+    return redirect()->route('books.index');
+    }
 
         return back()->withErrors([
             'email' => 'The email or password is incorrect.',
