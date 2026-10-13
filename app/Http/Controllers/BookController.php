@@ -25,7 +25,7 @@ class BookController extends Controller
     public function storeComment(Request $request, Book $book)
     {
     $validated = $request->validate([
-        'text' => ['required', 'string', 'max:2000'],
+        'text' => ['required', 'string', 'max:2000', 'min:5'],
     ]);
 
     $book->comments()->create([
